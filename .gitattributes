@@ -1,1 +1,5 @@
 *.geojson filter=lfs diff=lfs merge=lfs -text
+diff.geojson filter=lfs diff=lfs merge=lfs -text
+hendricks.geojson filter=lfs diff=lfs merge=lfs -text
+OSM-Data-04082025.geojson filter=lfs diff=lfs merge=lfs -text
+IndianaMapDS.geojson filter=lfs diff=lfs merge=lfs -text
