@@ -1,0 +1,6 @@
+This is my proof of work and attempt at making it easy to collaborate
+
+The steps I have take so far are:
+1. Removed unnecessary fields in qgis (TODO: make it automated)
+2. I have added a field that will be used to filter unmatched streets, it will be removed before upload
+3. I created a TODO file

@@ -3,3 +3,5 @@ diff.geojson filter=lfs diff=lfs merge=lfs -text
 hendricks.geojson filter=lfs diff=lfs merge=lfs -text
 OSM-Data-04082025.geojson filter=lfs diff=lfs merge=lfs -text
 IndianaMapDS.geojson filter=lfs diff=lfs merge=lfs -text
+IndianaMapDs-current.geojson filter=lfs diff=lfs merge=lfs -text
+export-04082025.osm filter=lfs diff=lfs merge=lfs -text
