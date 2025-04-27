@@ -16,4 +16,4 @@ In order to assist in progress run the run_tasks.py script. The script will pars
 
 I created a visual to see the grid
 
-![Grid of the data](/grid_visualization.png)
+![Grid of the data](/docs/images/grid_visualization.png)
