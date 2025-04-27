@@ -1,6 +1,7 @@
 import geopandas as gpd
 import numpy as np
 from shapely.geometry import box
+import matplotlib.pyplot as plt
 
 def split_geodataframe_into_grid(gdf, grid_size_x, grid_size_y, output_path_template):
     """
@@ -43,6 +44,52 @@ def split_geodataframe_into_grid(gdf, grid_size_x, grid_size_y, output_path_temp
                 print(f"Saving grid cell ({i},{j}) with {len(cell_gdf)} features to {output_path}")
                 cell_gdf.to_file(output_path, driver="GeoJSON")
 
+def visualize_grid(gdf, grid_size_x, grid_size_y, output_image_path):
+    """
+    Visualize the grid overlaid on the GeoDataFrame and save it as a PNG image.
+    
+    Parameters:
+    -----------
+    gdf : GeoDataFrame
+        The GeoDataFrame to visualize
+    grid_size_x, grid_size_y : int
+        Number of grid cells in x and y direction
+    output_image_path : str
+        Path to save the PNG image
+    """
+    # Get the bounds of the entire dataset
+    minx, miny, maxx, maxy = gdf.total_bounds
+    
+    # Calculate cell dimensions
+    cell_width = (maxx - minx) / grid_size_x
+    cell_height = (maxy - miny) / grid_size_y
+    
+    # Plot the GeoDataFrame
+    fig, ax = plt.subplots(figsize=(10, 10))
+    gdf.plot(ax=ax, color='lightgrey', edgecolor='black')
+    
+    # Add grid lines and labels
+    for i in range(grid_size_x + 1):
+        x = minx + i * cell_width
+        ax.plot([x, x], [miny, maxy], color='red', linewidth=0.5)
+    for j in range(grid_size_y + 1):
+        y = miny + j * cell_height
+        ax.plot([minx, maxx], [y, y], color='red', linewidth=0.5)
+    
+    # Add labels to each cell
+    for i in range(grid_size_x):
+        for j in range(grid_size_y):
+            cell_center_x = minx + (i + 0.5) * cell_width
+            cell_center_y = miny + (j + 0.5) * cell_height
+            ax.text(cell_center_x, cell_center_y, f"{i},{j}", color='Red', 
+                    fontsize=20, ha='center', va='center', weight='bold')
+    
+    # Save the image
+    plt.title("Grid Visualization")
+    plt.savefig(output_image_path, dpi=300)
+    plt.close()
+
 # Example usage
 gdf = gpd.read_file("./IndianaMapDS-current.geojson")
 split_geodataframe_into_grid(gdf, 10, 10, "output/grid_{x}_{y}.geojson")
+visualize_grid(gdf, 10, 10, "output/grid_visualization.png")

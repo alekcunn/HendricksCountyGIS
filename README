@@ -12,3 +12,8 @@ The steps I have taken so far are:
 
 
 In order to assist in progress run the run_tasks.py script. The script will parse the data 
+
+
+I created a visual to see the grid
+
+![Grid of the data](./grid_visualization.png)
