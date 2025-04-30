@@ -113,4 +113,4 @@ def visualize_grid(gdf, grid_size_x, grid_size_y, output_image_path):
 # Example usage
 gdf = gpd.read_file("./IndianaMapDS-current.geojson")
 split_geodataframe_into_grid(gdf, 10, 10, "output/grid_{x}_{y}.geojson")
-visualize_grid(gdf, 10, 10, "output/grid_visualization.png")
+visualize_grid(gdf, 10, 10, "docs/images/grid_visualization.png")
