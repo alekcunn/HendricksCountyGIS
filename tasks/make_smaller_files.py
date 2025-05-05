@@ -6,7 +6,7 @@ import json
 
 def split_geodataframe_into_grid(gdf, grid_size_x, grid_size_y, output_path_template):
     """
-    Split a GeoDataFrame into a grid and save each cell as a separate file.
+    Split a GeoDataFrame into a grid and save each cell as a separate file, excluding finished cells.
     
     Parameters:
     -----------
@@ -17,6 +17,10 @@ def split_geodataframe_into_grid(gdf, grid_size_x, grid_size_y, output_path_temp
     output_path_template : str
         Template for output files (e.g., "grid_{x}_{y}.geojson")
     """
+    # Load finished cells
+    with open("./finished-cells.json", "r") as f:
+        finished_cells = json.load(f)
+
     # Get the bounds of the entire dataset
     minx, miny, maxx, maxy = gdf.total_bounds
     
@@ -27,6 +31,12 @@ def split_geodataframe_into_grid(gdf, grid_size_x, grid_size_y, output_path_temp
     # Create grid cells and process each one
     for i in range(grid_size_x):
         for j in range(grid_size_y):
+            # Check if the cell is in finished cells
+            cell_key = f"grid_{i}_{j}"
+            if cell_key in finished_cells:
+                print(f"Skipping finished cell ({i},{j})")
+                continue
+
             # Calculate cell bounds
             cell_minx = minx + i * cell_width
             cell_maxx = minx + (i + 1) * cell_width
