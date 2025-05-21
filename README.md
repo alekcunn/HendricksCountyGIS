@@ -13,6 +13,8 @@ The steps I have taken so far are:
 
 In order to assist in progress run the run_tasks.py script. The script will parse the data 
 
+The run task will generate 
+
 
 I created a visual to see the grid
 
